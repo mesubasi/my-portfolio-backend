@@ -3,12 +3,16 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const server = express();
+const errorHandler = require("./middleware/errorHandler");
+const reqHandler = require("./middleware/reqHandler");
 const dotenv = require("dotenv");
 
 //routes
 const contactRoute = require("./routes/contact");
 
 dotenv.config();
+
+server.use(reqHandler);
 
 const PORT = process.env.PORT;
 const MONGO_URI = process.env.MONGO_URI;
@@ -24,7 +28,7 @@ const connect = async () => {
 
 //middlewares
 server.use(express.json());
-
+server.use(errorHandler);
 server.use("/api/contact", contactRoute);
 
 server.listen(PORT, () => {

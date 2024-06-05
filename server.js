@@ -2,6 +2,7 @@
 
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const server = express();
 const errorHandler = require("./middleware/errorHandler");
 const reqHandler = require("./middleware/reqHandler");
@@ -12,6 +13,7 @@ const contactRoute = require("./routes/contact");
 
 dotenv.config();
 
+server.use(cors());
 server.use(reqHandler);
 
 const PORT = process.env.PORT;

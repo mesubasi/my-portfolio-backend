@@ -10,6 +10,7 @@ const dotenv = require("dotenv");
 
 //routes
 const contactRoute = require("./routes/contact");
+const authRoute = require("./routes/auth");
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ const connect = async () => {
 server.use(express.json());
 server.use(errorHandler);
 server.use("/api/contact", contactRoute);
+server.use("/api/user", authRoute);
 
 server.listen(PORT, () => {
   connect();
